@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AnimeWorld → Yamtrack</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <main>
+    <header class="hero">
+      <img src="icons/icon128.png" alt="" class="logo" width="56" height="56">
+      <div>
+        <h1>AnimeWorld <span class="arrow">→</span> Yamtrack</h1>
+        <p class="sub">Watch on AnimeWorld, your Yamtrack list updates itself.</p>
+      </div>
+      <span class="chip" id="version">v0</span>
+    </header>
+
+    <!-- Connection -->
+    <section class="card" aria-labelledby="h-conn">
+      <div class="card-head">
+        <h2 id="h-conn">Connection</h2>
+        <div class="conn" id="conn" data-state="unknown">
+          <span class="dot"></span><span id="connText">Checking…</span>
+        </div>
+      </div>
+
+      <label class="field">
+        <span class="label">Yamtrack URL</span>
+        <div class="url-row">
+          <input id="baseUrl" type="url" placeholder="http://192.168.1.50:8000" autocomplete="off" spellcheck="false" required>
+          <button id="save" class="btn">Save</button>
+          <button id="test" class="btn primary">Test connection</button>
+        </div>
+        <span class="hint">Include the sub-path if you set <code>BASE_URL</code> (e.g. https://home.lan/yamtrack). Uses your normal Yamtrack login in this browser — no password stored.</span>
+      </label>
+      <div class="status-row">
+        <div id="status" role="status" aria-live="polite"></div>
+        <a id="openYamtrack" class="link" target="_blank" rel="noopener" hidden>Open Yamtrack ↗</a>
+      </div>
+    </section>
+
+    <!-- Behaviour -->
+    <section class="card" aria-labelledby="h-sync">
+      <div class="card-head">
+        <h2 id="h-sync">Sync</h2>
+        <span class="saved" id="savedTick" aria-hidden="true">Saved ✓</span>
+      </div>
+
+      <div class="setting">
+        <div>
+          <div class="label">Auto-sync</div>
+          <div class="hint">Turn off to pause all syncing.</div>
+        </div>
+        <label class="switch">
+          <input id="enabled" type="checkbox">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+
+      <div class="setting column">
+        <div class="setting-top">
+          <div>
+            <div class="label">Sync when watched</div>
+            <div class="hint">Position-based — skipping ahead counts.</div>
+          </div>
+          <output id="thresholdOut" class="big">80%</output>
+        </div>
+        <input id="thresholdPct" type="range" min="10" max="100" step="5">
+        <div class="scale"><span>10%</span><span>50%</span><span>100%</span></div>
+      </div>
+
+      <div class="setting">
+        <div>
+          <div class="label">Fallback timer</div>
+          <div class="hint">If the player can't be seen (other servers), sync after this long on the page. 0 = only “Sync now”.</div>
+        </div>
+        <div class="stepper">
+          <button type="button" class="step" data-step="-1" aria-label="Fewer minutes">−</button>
+          <input id="fallbackMinutes" type="number" min="0" max="180" inputmode="numeric">
+          <span class="unit">min</span>
+          <button type="button" class="step" data-step="1" aria-label="More minutes">+</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Queue -->
+    <section class="card" aria-labelledby="h-queue">
+      <div class="card-head">
+        <h2 id="h-queue">Waiting to sync <span class="count" id="queueCount">0</span></h2>
+        <button id="flush" class="btn small" hidden>Send now</button>
+      </div>
+      <ul class="list" id="queueList"></ul>
+      <p class="empty" id="queueEmpty">Nothing waiting — everything is synced ✓</p>
+      <p class="hint">Updates made while logged out or away from home wait here (kept on disk) and are sent automatically when Yamtrack is reachable again.</p>
+    </section>
+
+    <!-- History -->
+    <section class="card" aria-labelledby="h-hist">
+      <div class="card-head"><h2 id="h-hist">Synced <span class="count ok" id="historyCount">0</span></h2></div>
+      <ul class="list" id="historyList"></ul>
+      <p class="empty" id="historyEmpty">No syncs yet. Open an episode on AnimeWorld to get started.</p>
+    </section>
+
+    <footer>
+      <span>Tip: Yamtrack logins last 14 days by default — set <code>SESSION_COOKIE_AGE=31536000</code> for a year.</span>
+    </footer>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

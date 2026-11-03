@@ -1,0 +1,57 @@
+#aw-yamtrack-badge {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(460px, calc(100vw - 32px));
+  padding: 8px 10px 8px 12px;
+  border-radius: 10px;
+  background: #1f2430;
+  color: #e8eaf0;
+  font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  border-left: 4px solid #6b7280;
+  text-align: left;
+}
+#aw-yamtrack-badge[data-state="busy"] { border-left-color: #4a9eff; }
+#aw-yamtrack-badge[data-state="done"] { border-left-color: #22c55e; }
+#aw-yamtrack-badge[data-state="error"] { border-left-color: #ef4444; }
+#aw-yamtrack-badge[data-state="queued"] { border-left-color: #f59e0b; }
+#aw-yamtrack-badge.aw-yt-hidden { display: none; }
+
+#aw-yamtrack-badge .aw-yt-main { flex: 1; min-width: 0; }
+#aw-yamtrack-badge .aw-yt-show {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#aw-yamtrack-badge .aw-yt-show strong { font-weight: 600; color: #fff; }
+#aw-yamtrack-badge .aw-yt-status-row { color: #b6bccb; font-size: 12px; margin-top: 2px; }
+#aw-yamtrack-badge[data-state="error"] .aw-yt-status { color: #fca5a5; }
+#aw-yamtrack-badge[data-state="queued"] .aw-yt-status { color: #fcd34d; }
+#aw-yamtrack-badge[data-state="done"] .aw-yt-status { color: #86efac; }
+#aw-yamtrack-badge a { color: #7cb8ff; text-decoration: underline; cursor: pointer; }
+#aw-yamtrack-badge .aw-yt-action { margin-left: 6px; font-weight: 600; }
+#aw-yamtrack-badge .aw-yt-action[hidden] { display: none; }
+
+#aw-yamtrack-badge button {
+  flex: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: #4a9eff;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+#aw-yamtrack-badge button[hidden] { display: none; }
+#aw-yamtrack-badge button.aw-yt-close {
+  background: transparent;
+  color: #9ca3af;
+  padding: 0 4px;
+  font-size: 16px;
+  align-self: flex-start;
+}

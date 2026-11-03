@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "AnimeWorld → Yamtrack",
+  "version": "0.3.1",
+  "description": "Updates your self-hosted Yamtrack anime progress when you watch an episode on AnimeWorld.",
+  "permissions": ["storage", "declarativeNetRequestWithHostAccess", "alarms", "cookies"],
+  "optional_host_permissions": ["http://*/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.animeworld.ac/play/*",
+        "*://*.animeworld.so/play/*",
+        "*://*.animeworld.tv/play/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "AnimeWorld → Yamtrack settings",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  }
+}
